@@ -20,6 +20,9 @@ process {
             $commit = git log -1 --pretty=%B
             $null = $commit[0] -match '(?<package>(?<=\[).+?(?=\]))'
             
+            Write-Host "Commit Message: $($commit[0])"
+            Write-Host $matches.package
+
             #Get the Nuspec based on the regex match
             $NuspecFile = $matches.package
 
