@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Firefox</id>
+    <version>75.0</version>
+    <title>Mozilla Firefox</title>
+    <authors>Mozilla</authors>
+    <owners>chocolatey</owners>
+    <licenseUrl>https://www.mozilla.org/en-US/MPL/2.0/</licenseUrl>
+    <projectUrl>https://www.mozilla.org/en-US/firefox/new/</projectUrl>
+    <iconUrl>https://cdn.jsdelivr.net/gh/chocolatey-community/chocolatey-coreteampackages@8a7376cf4e5b7cde0eb1c6a608529601bfcd9546/icons/firefox.svg</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Bringing together all kinds of awesomeness to make browsing better for you.
+
+## Features
+
+- A powerful, new engine that’s built for rapidfire performance.
+- Better, faster page loading that uses less computer memory.
+- Gorgeous design and smart features for intelligent browsing.
+- Instantly import your online info and favorites from any other browser.
+- The most powerful private browsing mode with added tracking protection.
+- Firefox Quantum features: screenshots, pocket, gaming &amp; VR, library.
+- Customization Features - addons &amp; extensions, themes, toolbar.
+- Synced across devices - passwords, bookmarks, tabs and more.
+- Ad tracker blocking.
+- Password manager.
+
+## Package Parameters
+
+- `/l:&lt;locale&gt;` - Install given Firefox locale. See the [official page](https://releases.mozilla.org/pub/firefox/releases/latest/README.txt) for a complete list of available locales.
+
+Command-line options for installer configuration. See the [official page](https://firefox-source-docs.mozilla.org/browser/installer/windows/installer/FullConfig.html) for details and defaults.
+- `/InstallDir:&lt;path&gt;`
+- `/NoTaskbarShortcut` Do not create Taskbar Shortcut
+- `/NoDesktopShortcut` Do not create Desktop Shortcut
+- `/NoStartMenuShortcut` Do not create Start Menu Shortcut
+- `/NoMaintenanceService` Do not install Maintenance Service
+- `/RemoveDistributionDir` Remove Distribution directory on installation/update. (This is the default behavior of the Firefox Installer, but not for this Chocolatey Package)
+- `/NoAutoUpdate` Sets a policies.json file to not update Firefox and does not install the Maintenance Service
+
+### Examples
+`choco install Firefox --params "/l:en-GB"`\
+`choco install Firefox --params "/NoTaskbarShortcut /NoDesktopShortcut /NoAutoUpdate"`\
+`choco install Firefox --params "/l:en-GB /RemoveDistributionDir"`
+
+## Notes
+
+- Looking for Firefox Developer Edition? Install the [firefox-dev](/packages/firefox-dev) package.
+- Looking for Firefox Extended Support Release? Install the [FirefoxESR](/packages/FirefoxESR) package.
+- If locale package parameter is not present, this package installs Firefox in the first language which matches this list:
+  1. If Firefox is already installed it uses the same language as the already installed one.
+  1. The Windows system language.
+  1. If Firefox does not support the system language, it will fall back to `en-US`.</description>
+    <summary>Bringing together all kinds of awesomeness to make browsing better for you</summary>
+    <releaseNotes>https://www.mozilla.org/en-US/firefox/75.0/releasenotes/</releaseNotes>
+    <tags>browser mozilla firefox admin foss cross-platform</tags>
+    <projectSourceUrl>https://hg.mozilla.org/mozilla-central/</projectSourceUrl>
+    <packageSourceUrl>https://github.com/chocolatey-community/chocolatey-coreteampackages/tree/master/automatic/firefox</packageSourceUrl>
+    <docsUrl>https://developer.mozilla.org/en-US/Firefox</docsUrl>
+    <bugTrackerUrl>https://bugzilla.mozilla.org/</bugTrackerUrl>
+    <dependencies>
+      <dependency id="chocolatey-core.extension" version="1.3.3" />
+    </dependencies>
+  </metadata>
+</package>
