@@ -27,7 +27,7 @@ process {
             $NuspecFile = $matches.package
 
             #isolate the folder containing all of our data based on the match
-            $changes = Get-ChildItem $env:Build_SourcesDirectory -Recurse -Filter '*.nuspec' | Where-Object { $_.BaseName -eq $env:ChangedNuspec }
+            $changes = Get-ChildItem $env:Build_SourcesDirectory -Recurse -Filter '*.nuspec' | Where-Object { $_.BaseName -eq $NuspecFile }
 
             #Save the folder path based on above
             $nuspecLocation = ($changes | Where-Object { $_.Extension -eq '.nuspec' -and $_.Directory }).DirectoryName
@@ -36,7 +36,7 @@ process {
             $filter = Get-ChildItem -Path $nuspecLocation -Filter '*.nuspec' | Select-Object FullName, BaseName, Name
 
             $filter
-            
+
             $NuspecFullPath = $filter.Fullname
             $NuspecFile = $filter.Name
             $NuspecBaseName = $filter.Basename
