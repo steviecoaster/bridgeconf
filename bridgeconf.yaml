@@ -8,7 +8,7 @@ trigger:
 jobs:
 - job: ChocoFun
   pool:
-    name: Azure Pipelines
+    vmImage: 'windows-latest'
   steps:
   - task: PowerShell@2
     displayName: 'Build pipeline variables'
