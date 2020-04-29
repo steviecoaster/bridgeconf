@@ -44,7 +44,7 @@ jobs:
       ArtifactName: '$(Package)'
 
   - task: gep13.chocolatey-azuredevops.chocolatey-azuredevops.ChocolateyCommand@0
-    displayName: 'Chocolatey install'
+    displayName: 'Chocolatey Install'
     inputs:
       command: install
       installPackageId: '$(Package)'

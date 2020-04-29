@@ -35,8 +35,6 @@ process {
             #Emit some pipeline variables now that we have our information gathered
             $filter = Get-ChildItem -Path $nuspecLocation -Filter '*.nuspec' | Select-Object FullName, BaseName, Name
 
-            $filter
-
             $NuspecFullPath = $filter.Fullname
             $NuspecFile = $filter.Name
             $NuspecBaseName = $filter.Basename
@@ -49,7 +47,6 @@ process {
         }
 
         if($Test.IsPresent){
-            $testPath =  $(Split-Path -Parent $MyInvocation.MyCommand.Definition)
             Install-Module -Name Pester -RequiredVersion 4.3.1 -Scope CurrentUser -Force -SkipPublisherCheck
             Invoke-Pester ./tests -OutputFormat 'NUnitXml' -OutputFile "$($env:Build_ArtifactStagingDirectory)\$($env:package).xml"
          }
