@@ -45,7 +45,7 @@ process {
         if($Test.IsPresent){
             $testPath =  $(Split-Path -Parent $MyInvocation.MyCommand.Definition)
             Install-Module -Name Pester -RequiredVersion 4.3.1 -Scope CurrentUser -Force -SkipPublisherCheck
-            Invoke-Pester ../tests
+            Invoke-Pester ./tests
          }
 
     }
