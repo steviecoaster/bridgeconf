@@ -34,6 +34,9 @@ process {
 
             #Emit some pipeline variables now that we have our information gathered
             $filter = Get-ChildItem -Path $nuspecLocation -Filter '*.nuspec' | Select-Object FullName, BaseName, Name
+
+            $filter
+            
             $NuspecFullPath = $filter.Fullname
             $NuspecFile = $filter.Name
             $NuspecBaseName = $filter.Basename
