@@ -1,7 +1,6 @@
 $testPath =  $(Split-Path -Parent $MyInvocation.MyCommand.Definition)
 $functionpath = "$(Split-Path -Parent $testPath)\tests\Get-ChocolateyPackageMetaData.ps1"
 
-
 . $functionpath
 
 $package = Get-ChocolateyPackageMetaData -NuspecFile "$env:Nuspec"
