@@ -15,8 +15,7 @@ param(
 
 process {
 
-    switch ($true) {
-        'Build' {
+    if($Build.IsPresent){
             #Grep the commit log for the package I'm working on. This requires commits to be made in a specific format. -- E.g. "[packagename] Changed some code in the chocolateyInstall.ps1 file"
             $commit = git log -1 --pretty=%B
             $null = $commit[0] -match '(?<package>(?<=\[).+?(?=\]))'
@@ -43,12 +42,11 @@ process {
             Write-Output "##vso[task.setvariable variable=Package]$NuspecBaseName"
         }
 
-        'Test' {
+        if($Test.IsPresent){
             $testPath =  $(Split-Path -Parent $MyInvocation.MyCommand.Definition)
             Install-Module -Name Pester -RequiredVersion 4.3.1 -Scope CurrentUser -Force -SkipPublisherCheck
             Invoke-Pester $testPath
          }
 
     }
-    
-}
+
