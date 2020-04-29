@@ -1,0 +1,60 @@
+name: BridgeConf YAML
+trigger:
+  branches:
+    include:
+    - master
+    exclude:
+    - develop
+jobs:
+- job: ChocoFun
+  pool:
+    name: Azure Pipelines
+  steps:
+  - task: PowerShell@2
+    displayName: 'Build pipeline variables'
+    inputs:
+      targetType: filePath
+      filePath: ./build/build.ps1
+      arguments: '-Build'
+
+  - task: PowerShell@2
+    displayName: Pester
+    inputs:
+      targetType: filePath
+      filePath: ./build/build.ps1
+      arguments: '-Test'
+
+  - task: PublishTestResults@2
+    displayName: 'Publish Test Results'
+    inputs:
+      testResultsFormat: NUnit
+      testResultsFiles: '$(Package).XML'
+      searchFolder: '$(Build.ArtifactStagingDirectory)'
+      failTaskOnFailedTests: true
+
+  - task: gep13.chocolatey-azuredevops.chocolatey-azuredevops.ChocolateyCommand@0
+    displayName: 'Pack Choco Package'
+    inputs:
+      packWorkingDirectory: '$(NuspecDirectory)'
+      packNuspecFileName: '$(NuspecFile)'
+
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Artifact'
+    inputs:
+      ArtifactName: '$(Package)'
+
+  - task: gep13.chocolatey-azuredevops.chocolatey-azuredevops.ChocolateyCommand@0
+    displayName: 'Chocolatey install'
+    inputs:
+      command: install
+      installPackageId: '$(Package)'
+      installSource: '$(Build.ArtifactStagingDirectory)'
+      installInstallArgs: '-y'
+
+  - task: gep13.chocolatey-azuredevops.chocolatey-azuredevops.ChocolateyCommand@0
+    displayName: 'Chocolatey Uninstall'
+    inputs:
+      command: custom
+      extraArguments: '-y'
+      customCommand: uninstall
+      customArguments: '$(Package)'
