@@ -56,12 +56,15 @@ process {
             $source  = Get-ChildItem -Path $env:Pipeline_Workspace -Recurse -Filter *.nupkg
             $package = $source.FullName
             $name = $source.Name
+            $parent = $source.PSParentPath
 
             Write-Output $package
             Write-Output $name
+            Write-Output $parent
 
             Write-Output "##vso[task.setvariable variable=Package]$package"
             Write-Output "##vso[task.setvariable variable=Name]$name"
+            Write-Output "##vso[task.setvariable variable=Parent]$parent"
          }
 
     }
