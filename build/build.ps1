@@ -51,4 +51,10 @@ process {
             Invoke-Pester ./tests -OutputFormat 'NUnitXml' -OutputFile "$($env:Build_ArtifactStagingDirectory)\$($env:package).xml"
          }
 
+         if($Deploy.IsPresent){
+
+            $package  = Get-ChildItem -Path $env:Build_ArtifactStagingDirectory -Filter *.nupkg | Select-Object -ExpandProperty FullName
+            Write-Output "##vso[task.setvariable variable=Package]$package"
+         }
+
     }
