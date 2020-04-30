@@ -53,7 +53,7 @@ process {
 
          if($Deploy.IsPresent){
 
-            $source  = Get-ChildItem -Path $env:Pipeline_Workspace -Filter *.nupkg
+            $source  = Get-ChildItem -Path $env:Pipeline_Workspace -Recurse -Filter *.nupkg
             $package = $source.FullName
             $name = $source.Name
 
