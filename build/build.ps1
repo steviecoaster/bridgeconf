@@ -56,7 +56,7 @@ process {
             $source  = Get-ChildItem -Path $env:Pipeline_Workspace -Recurse -Filter *.nupkg
             $package = $source.FullName
             $name = $source.Name
-            $parent = $source.PSParentPath
+            $parent = $source.Directory
 
             Write-Output $package
             Write-Output $name
