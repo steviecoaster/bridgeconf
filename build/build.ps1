@@ -53,8 +53,11 @@ process {
 
          if($Deploy.IsPresent){
 
-            $package  = Get-ChildItem -Path $env:Build_ArtifactStagingDirectory -Filter *.nupkg | Select-Object -ExpandProperty FullName
+            $source  = Get-ChildItem -Path $env:Build_ArtifactStagingDirectory -Filter *.nupkg | Select-Object -ExpandProperty FullName
+            $package = $source.FullName
+            $name = $source.Name
             Write-Output "##vso[task.setvariable variable=Package]$package"
+            Write-Output "##vso[task.setvariable variable=Name]$name"
          }
 
     }
