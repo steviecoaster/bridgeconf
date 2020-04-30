@@ -57,8 +57,8 @@ process {
             $package = $source.FullName
             $name = $source.Name
 
-            $package
-            $name
+            Write-Output $package
+            Write-Output $name
 
             Write-Output "##vso[task.setvariable variable=Package]$package"
             Write-Output "##vso[task.setvariable variable=Name]$name"
